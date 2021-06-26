@@ -1,27 +1,15 @@
 class App4 {
-    titleInp: HTMLInputElement;
-    contentInp: HTMLInputElement;
-    createdDate: HTMLDivElement;
-    addButton: HTMLButtonElement;
-    colorSelect: HTMLSelectElement;
-    taskList = [];
-    taskCon: HTMLDivElement;
-    toDoList: HTMLDivElement;
-    appStorage: AppStorage4;
-
     constructor() {
+        this.taskList = [];
         this.appStorage = new AppStorage4();
-
-        this.toDoList = <HTMLDivElement>document.getElementById('toDoList');
-        this.titleInp = <HTMLInputElement>document.getElementById('titleInp');
-        this.contentInp = <HTMLInputElement>document.getElementById('contentInp');
-        this.colorSelect = <HTMLSelectElement>document.getElementById('colorSelect');
-        this.addButton = <HTMLButtonElement>document.getElementById('addButton');
-
+        this.toDoList = document.getElementById('toDoList');
+        this.titleInp = document.getElementById('titleInp');
+        this.contentInp = document.getElementById('contentInp');
+        this.colorSelect = document.getElementById('colorSelect');
+        this.addButton = document.getElementById('addButton');
         this.addButton.addEventListener('click', () => this.clickAddTask(), false);
         this.displayTasks();
     }
-
     clickAddTask() {
         const title = this.titleInp.value;
         const content = this.contentInp.value;
@@ -36,17 +24,15 @@ class App4 {
         console.log(this.taskList);
         setTimeout(() => this.displayTasks(), 500);
     }
-
-    openModal(taskIndex: number) {
+    openModal(taskIndex) {
         if (document.getElementById('modal'))
             document.getElementById('modal').outerHTML = '';
         const list = this.appStorage.getFromLocalStorage('todo');
         const taskList = JSON.parse(list) || [];
         const task = taskList[taskIndex];
-
         const { title, color, content } = task;
         const divwrapper = document.createElement('div');
-        divwrapper.className = 'divwrapper'
+        divwrapper.className = 'divwrapper';
         divwrapper.id = 'modal';
         const div = document.createElement('div');
         div.className = 'modal';
@@ -59,16 +45,14 @@ class App4 {
         const colorEl = document.createElement('select');
         colorEl.name = 'changeColors';
         colorEl.id = 'modal-color';
-
         let colorHTML = '';
         ['red', 'yellow', 'green', 'blue', 'gray'].map(c => {
             colorHTML += `<option ${color === c ? 'selected' : ''} value="${c}" class="${c}">${c}</option>`;
-        })
+        });
         colorEl.innerHTML = colorHTML;
         const saveButton = document.createElement('button');
         saveButton.textContent = 'save';
         saveButton.onclick = () => this.updateTask(taskIndex);
-
         div.appendChild(titleEl);
         div.appendChild(contentEl);
         div.appendChild(colorEl);
@@ -76,50 +60,41 @@ class App4 {
         divwrapper.appendChild(div);
         document.body.appendChild(divwrapper);
     }
-
-    updateTask(taskIndex: number) {
+    updateTask(taskIndex) {
         const list = this.appStorage.getFromLocalStorage('todo');
         this.appStorage.removeAll('todo');
-        const title = <HTMLInputElement>document.getElementById('modal-title');
-        const content = <HTMLInputElement>document.getElementById('modal-content');
-        const colorSelect = <HTMLSelectElement>document.getElementById('modal-color');
+        const title = document.getElementById('modal-title');
+        const content = document.getElementById('modal-content');
+        const colorSelect = document.getElementById('modal-color');
         const color = colorSelect.options[colorSelect.selectedIndex].text;
         const taskList = JSON.parse(list) || [];
         const newTaskList = taskList.map((task, index) => {
             if (taskIndex === index) {
-                task = {
-                    ...task, title: title.value, content: content.value, color
-                }
+                task = Object.assign(Object.assign({}, task), { title: title.value, content: content.value, color });
             }
             return task;
-        })
+        });
         this.appStorage.removeAll('todo');
         this.appStorage.saveArrayToLocalStorage(newTaskList);
         if (document.getElementById('modal'))
             document.getElementById('modal').outerHTML = '';
         setTimeout(() => this.displayTasks(), 500);
     }
-
-    pinDownTask(taskIndex: number) {
+    pinDownTask(taskIndex) {
         const list = this.appStorage.getFromLocalStorage('todo');
         this.appStorage.removeAll('todo');
         const taskList = JSON.parse(list) || [];
-
         const newTaskList = taskList.sort(this.sortByPinned).map((task, index) => {
             if (taskIndex === index) {
-                task = {
-                    ...task,
-                    isPinned: !task.isPinned
-                }
+                task = Object.assign(Object.assign({}, task), { isPinned: !task.isPinned });
             }
             return task;
-        })
+        });
         this.appStorage.removeAll('todo');
         this.appStorage.saveArrayToLocalStorage(newTaskList);
         setTimeout(() => this.displayTasks(), 500);
     }
-
-    deleteTask(id: number) {
+    deleteTask(id) {
         const list = this.appStorage.getFromLocalStorage('todo');
         this.appStorage.removeAll('todo');
         const taskList = JSON.parse(list) || [];
@@ -127,11 +102,9 @@ class App4 {
         this.appStorage.saveArrayToLocalStorage(filtredTaskList);
         setTimeout(() => this.displayTasks(), 500);
     }
-
     sortByPinned(a, b) {
         return b.isPinned - a.isPinned;
     }
-
     displayTasks() {
         console.log('displaytask');
         const list = this.appStorage.getFromLocalStorage('todo');
@@ -140,13 +113,7 @@ class App4 {
         const taskList = JSON.parse(list) || [];
         this.toDoList.innerHTML = '';
         console.log(this.taskList);
-        taskList.sort(this.sortByPinned).map(({
-            title,
-            content,
-            isPinned,
-            color,
-            date,
-        }, index) => {
+        taskList.sort(this.sortByPinned).map(({ title, content, isPinned, color, date, }, index) => {
             console.log(title);
             const div = document.createElement('div');
             div.onclick = () => this.openModal(index);
@@ -165,10 +132,8 @@ class App4 {
             const pinBtn = document.createElement('button');
             pinBtn.textContent = 'Pin';
             pinBtn.onclick = () => this.pinDownTask(index);
-
             const isPinnedEl = document.createElement('div');
             isPinnedEl.textContent = isPinned ? 'pinowany' : '';
-
             div.appendChild(titleEl);
             div.appendChild(contentEl);
             div.appendChild(colorEl);
@@ -177,30 +142,25 @@ class App4 {
             div.appendChild(deleteBtn);
             this.toDoList.appendChild(div);
             this.toDoList.appendChild(pinBtn);
-        })
+        });
     }
 }
-
 class AppStorage4 {
-    saveToLocalStorage(value: unknown) {
+    saveToLocalStorage(value) {
         const list = this.getFromLocalStorage('todo');
         const taskList = JSON.parse(list) || [];
         taskList.push(value);
         localStorage.setItem('todo', JSON.stringify(taskList));
     }
-
-    saveArrayToLocalStorage(value: unknown) {
+    saveArrayToLocalStorage(value) {
         localStorage.setItem('todo', JSON.stringify(value));
     }
-
-    getFromLocalStorage(key: string) {
+    getFromLocalStorage(key) {
         return localStorage.getItem(key);
     }
-
-    removeAll(key: string) {
+    removeAll(key) {
         localStorage.removeItem(key);
     }
 }
-
 const startApp4 = new App4();
 //tsc lab4/SRC/code.ts --outDir lab4/build --target ES2017

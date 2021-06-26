@@ -1,0 +1,84 @@
+$col1: #003233;
+$col2: #e5f4f9;
+$col3: #5ba5c2;
+$radius: 50px;
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    background: url("../res/clouds.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    color: $col2;
+}
+
+:root {
+    font-size: 16px;
+}
+
+#container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 10vh;
+}
+
+#addCity {
+    display: flex;
+    margin: 25px;
+    align-items: center;
+    flex-direction: center;
+    width: 25vw;
+    height: 40px;
+    border: 3px solid;
+    background-color: $col2;
+    border-radius: $radius;
+    input {
+        width: 50%;
+        height: 100%;
+        text-align: center;
+        border: none;
+        background-color: $col2;
+        border-radius: $radius;
+        color: $col1;
+        font-size: 21px;
+    }
+    button {
+        width: 50%;
+        height: 100%;
+        font-size: 21px;
+        color: $col2;
+        background-color: $col1;
+        border: 3px solid $col1;
+        border-radius: $radius;
+    }
+}
+
+#tileCon {
+    div{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        margin: 20px;
+        background-color: rgba(0,0,0, 0.4);
+        border-radius: $radius;
+        h3{
+            padding: 5px;
+            color: $col3;
+        }
+        div{
+            background-color: rgba(0,0,0,0);
+            padding: 5px;
+            margin: 0;
+        }
+    }
+}

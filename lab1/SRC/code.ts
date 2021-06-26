@@ -1,4 +1,4 @@
-class App {
+class App1 {
 
     inputAmoElem: HTMLInputElement;
     sumInput: HTMLInputElement;
@@ -45,7 +45,7 @@ class GenerateInp {
         this.generatedInpList.map((inp, index) => {
             const div = document.createElement('div');
             const buttonDel = document.createElement('button')
-            buttonDel.textContent = 'X';
+            buttonDel.textContent = 'DEL';
             buttonDel.onclick = () => this.deleteInputs(index);
             const input = document.createElement("input");
             input.setAttribute('value', `${index + 1}`);
@@ -66,6 +66,12 @@ class GenerateInp {
         console.log('stats');
         const sum = this.sum();
         document.getElementById('sum').textContent = sum;
+        const med = this.med();
+        document.getElementById('med').textContent = med;
+        const max = this.max();
+        document.getElementById('max').textContent = max;
+        const min = this.min();
+        document.getElementById('min').textContent = min;
     }
 
     sum() {
@@ -77,7 +83,41 @@ class GenerateInp {
         })
         return suma.toString();
     }
+
+    med() {
+        let medium = 0;
+        let suma = 0;
+        const arrayList = [...this.valuesCon.children];
+        arrayList.forEach(div => {
+            const value = parseInt(div.getElementsByTagName('input')[0].value);
+            suma += value;
+        })
+        medium = suma / arrayList.length;
+        return medium.toString();
+    }
+
+    max() {
+        let maximum = 0;
+        const arrayList = [...this.valuesCon.children];
+        const list = arrayList.map(div => {
+            const value = parseInt(div.getElementsByTagName('input')[0].value);
+            return value;
+        })
+        maximum = Math.max(...list);
+        return maximum.toString();
+    }
+
+    min() {
+        let minimum = 0;
+        const arrayList = [...this.valuesCon.children];
+        const list = arrayList.map(div => {
+            const value = parseInt(div.getElementsByTagName('input')[0].value);
+            return value;
+        })
+        minimum = Math.min(...list);
+        return minimum.toString();
+    }
 }
 
-const statApp = new App();
+const statApp = new App1();
 //tsc lab1/SRC/code.ts --outDir lab1/build --target ES2017

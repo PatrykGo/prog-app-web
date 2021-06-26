@@ -1,0 +1,20 @@
+.yellow {
+    background-color: yellow;
+}
+.divwrapper {
+    position: absolute;
+    left: 27%;
+    top: 40%;
+    background: grey;
+    width: 500px;
+    height: 200px;
+    
+    .modal {
+        background: grey;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        margin-top: 50px;
+    }
+}

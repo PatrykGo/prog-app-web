@@ -1,0 +1,125 @@
+$col1: #161f21;
+$col2: #eb8b35;
+$col3: #a43604;
+$radius: 50px;
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    background-color: $col3;
+    color: $col2;
+}
+
+:root {
+    font-size: 16px;
+}
+
+#container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 10vh;
+}
+
+#inputContainer {
+    display: flex;
+    margin: 25px;
+    align-items: center;
+    flex-direction: center;
+    width: 25vw;
+    height: 40px;
+    border: 3px solid;
+    background-color: $col2;
+    border-radius: $radius;
+    input {
+        width: 50%;
+        height: 100%;
+        border: none;
+        text-align: center;
+        background-color: $col2;
+        border-radius: $radius;
+        color: $col1;
+        font-size: 21px;
+    }
+    button {
+        width: 50%;
+        height: 100%;
+        font-size: 21px;
+        color: $col2;
+        background-color: $col1;
+        border: 3px solid $col1;
+        border-radius: $radius;
+    }
+}
+
+#valuesContainer {
+    display: flex;
+    align-items: center;
+    justify-content: laft;
+    flex-flow: row wrap;
+    div{
+        margin: 5px 5px;
+        padding: 5px 5px;
+        border: 2px solid $col2;
+        border-radius: $radius;
+        input{
+            border: none;
+            background-color: $col3;
+            color: $col1;
+            font-size: 16px;
+        }
+        button {
+            border: none;
+            background-color: $col3;
+            color: $col2;
+        }
+    }
+}
+
+#showCalculations {
+    display: flex;
+    flex-direction: row;
+    margin: 25px;
+    padding: 25px 50px;
+    border: 2px solid $col2 ;
+    border-radius: $radius;
+}
+
+.sum {
+    margin: 10px 10px;
+}
+
+#sum {
+    color: $col1;
+}
+
+.med {
+    margin: 10px 10px;
+}
+
+#med {
+    color: $col1;
+}
+
+.max {
+    margin: 10px 10px;
+}
+
+#max {
+    color: $col1;
+}
+
+.min {
+    margin: 10px 10px;
+}
+
+#min {
+    color: $col1;
+}
+

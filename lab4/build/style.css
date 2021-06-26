@@ -1,0 +1,28 @@
+.yellow {
+  background-color: yellow;
+}
+
+.divwrapper {
+  position: absolute;
+  left: 27%;
+  top: 40%;
+  background: grey;
+  width: 500px;
+  height: 200px;
+}
+
+.divwrapper .modal {
+  background: grey;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px;
+  margin-top: 50px;
+}
+/*# sourceMappingURL=style.css.map */
